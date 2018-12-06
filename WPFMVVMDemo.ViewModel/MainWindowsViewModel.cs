@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
-using Infrastructure;
+using MVVMInfrastructure;
 
 namespace WPFMVVMDemo.ViewModel
 {
@@ -24,7 +25,13 @@ namespace WPFMVVMDemo.ViewModel
                 SetPropertyNotify(ref _disPlayText, value, nameof(DisPlayText));
             }
         }
-        
+        private readonly ObservableCollection<DisplayModel> _listModel;
+        public ObservableCollection<DisplayModel> ListModel => _listModel;
+
+
+        private readonly NVDelegateCommand<KeyCommandParam> _keyDownCommand;
+        public NVDelegateCommand<KeyCommandParam> KeyDownCommand => _keyDownCommand;
+
         private readonly NVCommand _addCommand;
         public NVCommand AddCommand
         {
@@ -55,6 +62,20 @@ namespace WPFMVVMDemo.ViewModel
             _subtractCommand = new NVCommand(SubtractHandler);
             _multiplyCommand = new NVCommand(MultiplyHandler);
             _divideCommand = new NVCommand(DivideHandler);
+            _keyDownCommand = new NVDelegateCommand<KeyCommandParam>(KeyDownHandler);
+            _listModel = new ObservableCollection<DisplayModel>();
+        }
+
+        private Int32 _index;
+
+        private void KeyDownHandler(KeyCommandParam keyCommandParam)
+        {
+            var key = keyCommandParam.Key;
+
+            DisPlayText = key.ToString();
+
+            _index++;
+            _listModel.Add(new DisplayModel { Content = DisPlayText, Index = _index });
         }
 
         private void AddHandler()
