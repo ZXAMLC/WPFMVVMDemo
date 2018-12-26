@@ -9,7 +9,9 @@
         Height="450"
         Width="800"
         xmlns:commands="clr-namespace:XamlMVVMInfrastructure.WpfLib.Commands;assembly=XamlMVVMInfrastructure.WpfLib"
-        commands:KeyAttachCommand.KeyDownCommand="{Binding KeyDownCommand}">
+        commands:FELifeAttachCommand.LoadedCommand="{Binding LoadedCommand}"
+        commands:KeyAttachCommand.KeyDownCommand="{Binding KeyDownCommand}"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

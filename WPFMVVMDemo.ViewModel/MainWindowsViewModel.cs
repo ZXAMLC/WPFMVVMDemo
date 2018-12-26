@@ -56,6 +56,12 @@ namespace WPFMVVMDemo.ViewModel
             get => _divideCommand;
         }
 
+        private readonly NVCommand _loadedCommand;
+        public NVCommand LoadedCommand
+        {
+            get => _loadedCommand;
+        }
+
         public MainWindowsViewModel()
         {
             _addCommand = new NVCommand(AddHandler);
@@ -64,6 +70,13 @@ namespace WPFMVVMDemo.ViewModel
             _divideCommand = new NVCommand(DivideHandler);
             _keyDownCommand = new NVDelegateCommand<KeyCommandParam>(KeyDownHandler);
             _listModel = new ObservableCollection<DisplayModel>();
+
+            _loadedCommand = new NVCommand(LoadedHandler);
+        }
+
+        private void LoadedHandler()
+        {
+            
         }
 
         private Int32 _index;
